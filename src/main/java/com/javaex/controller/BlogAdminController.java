@@ -40,4 +40,16 @@ public class BlogAdminController {
 		
 		return "redirect:/";
 	}
+	
+	// 카테고리 설정 페이지
+	@RequestMapping("/{id}/admin/category")
+	public String adminCategory(@PathVariable("id") String id) {
+		return "blog/admin/blog-admin-cate";
+	}
+	
+	// 글쓰기 페이지
+	@RequestMapping("/{id}/admin/write")
+	public String adminWrite(@PathVariable("id") String id) {
+		return "blog/admin/blog-admin-write";
+	}
 }

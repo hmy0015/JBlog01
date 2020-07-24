@@ -23,6 +23,7 @@
        	]]>
 	</select>
 	
+	<!-- dao 블로그 기본 설정 수정 -->
 	<update id="updateBasic" parameterType="com.javaex.vo.BlogVo">
 		<![CDATA[
 			update blog

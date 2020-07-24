@@ -18,11 +18,7 @@
 		<c:import url="/WEB-INF/views/includes/blog-header.jsp"></c:import>
 
 		<div id="content">
-			<ul id="admin-menu" class="clearfix">
-				<li class="tabbtn selected"><a href="">기본설정</a></li>
-				<li class="tabbtn"><a href="">카테고리</a></li>
-				<li class="tabbtn"><a href="">글작성</a></li>
-			</ul>
+			<c:import url="/WEB-INF/views/includes/admin-menu.jsp"></c:import>
 			<!-- //admin-menu -->
 			
 			<div id="admin-content">
@@ -44,7 +40,7 @@
 			      				</c:when>
 			      				
 			      				<c:otherwise>
-			      					<td class="text-left"><img src=""></td> 
+			      					<td class="text-left"><img src="${pageContext.request.contextPath}/upload/${blogVo.logoFile}"></td> 
 			      				</c:otherwise>
 			      			</c:choose>
 			      		</tr>      		

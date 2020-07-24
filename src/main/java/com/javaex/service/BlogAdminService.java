@@ -25,9 +25,9 @@ public class BlogAdminService {
 		return blogAdminDao.getBlogInfo(id);
 	}
 
-	// service 블로그 정보 수정
+	// service 기본 설정 수정 
 	public int modifyBasic(String id, BlogVo blogVo, MultipartFile file) {
-		System.out.println("1. service - 블로그 정보 수정");
+		System.out.println("1. service - 기본 설정 수정 ");
 
 		////////////////데이터 추출 ////////////////
 
