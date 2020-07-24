@@ -17,4 +17,11 @@ public class BlogAdminDao {
 				
 		return sqlSession.selectOne("blog.getBlogInfo", id);
 	}
+
+	// dao 블로그 정보 수정
+	public int updateBasic(BlogVo blogVo) {
+		System.out.println("2. dao - 블로그 정보 수정");
+		
+		return sqlSession.update("blog.updateBasic", blogVo);
+	}
 }

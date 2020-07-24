@@ -26,7 +26,7 @@
 			<!-- //admin-menu -->
 			
 			<div id="admin-content">
-				<form action="" method="post" >
+				<form action="${pageContext.request.contextPath}/${authUser.id}/admin/modify" method="post" enctype="multipart/form-data">
 	 		      	<table id="admin-basic">
 	 		      		<colgroup>
 							<col style="width: 100px;">
@@ -37,8 +37,16 @@
 			      			<td><input id="textTitle" type="text" name="blogTitle" value="${blogVo.blogTitle}"></td>
 			      		</tr>
 			      		<tr>
-			      			<td><label>로고이미지</label></td>
-			      			<td class="text-left"><img src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg"></td>   
+			      			<td><label>로고이미지</label></td>			      			
+			      			<c:choose>
+			      				<c:when test="${blogVo.logoFile == 'default'}">
+			      					<td class="text-left"><img src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg"></td>   
+			      				</c:when>
+			      				
+			      				<c:otherwise>
+			      					<td class="text-left"><img src=""></td> 
+			      				</c:otherwise>
+			      			</c:choose>
 			      		</tr>      		
 			      		<tr>
 			      			<td>&nbsp;</td>
