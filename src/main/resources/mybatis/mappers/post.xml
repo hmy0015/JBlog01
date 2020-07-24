@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="post">
+	<!-- 최근 카테고리의 게시글 목록 가져오기 -->
+	<select id="getlistInfo" parameterType="String" resultType="com.javaex.vo.PostVo">
+		<![CDATA[
+			SELECT  p.postno,
+			        p.cateno,
+			        p.posttitle,
+			        p.postcontent,
+			        p.regdate
+			FROM post p, ( SELECT max(cateno) as cateNo
+			                FROM category
+			                where id = #{id}) c
+			where p.cateno = c.cateno
+			order by p.postno desc
+       	]]>
+	</select>
+	
+	<!-- 가장 최근 게시글 정보 받아오기 -->
+	<select id="getPostInfo" parameterType="String" resultType="com.javaex.vo.PostVo">
+		<![CDATA[
+			SELECT p.postno,
+			        p.cateno,
+			        p.posttitle,
+			        p.postcontent,
+			        p.regdate
+			FROM post p, ( SELECT max(postno) as postNo
+			                FROM post pn, ( SELECT max(cateno) as cateNo
+			                                FROM category
+			                                where id = #{id} ) cn
+			                where pn.cateno = cn.cateNo ) maxpn
+			where p.postno = maxpn.postNo
+       	]]>
+	</select>
+</mapper>
+
