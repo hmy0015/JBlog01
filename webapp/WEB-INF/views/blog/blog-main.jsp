@@ -94,8 +94,6 @@
 		<!-- //content -->
 		<div class=></div>
 		<c:import url="/WEB-INF/views/includes/blog-footer.jsp"></c:import>
-		
-	
 	
 	</div>
 	<!-- //wrap -->

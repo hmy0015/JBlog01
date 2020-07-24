@@ -6,7 +6,7 @@
 	<!-- 회원가입 시 자동생성 -->
 	<insert id="insertCategory" parameterType="com.javaex.vo.CategoryVo">
 		<![CDATA[
-			INSERT INTO category VALUES(#{cateNo}, #{id}, #{cateName}, #{description}, sysdate)
+			INSERT INTO category VALUES(SEQ_CATEGORY_NO.nextval, #{id}, #{cateName}, #{description}, sysdate)
        	]]>
 	</insert>
 	
