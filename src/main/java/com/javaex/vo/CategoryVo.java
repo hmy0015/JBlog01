@@ -3,15 +3,19 @@ package com.javaex.vo;
 public class CategoryVo {
 	private int cateNo;
 	private String id;
+	private int cnt;
 	private String cateName;
 	private String description;
 	private String regDate;
 	
 	public CategoryVo() {}
+	
 	public CategoryVo(String id) {}
-	public CategoryVo(int cateNo, String id, String cateName, String description, String regDate) {
+
+	public CategoryVo(int cateNo, String id, int cnt, String cateName, String description, String regDate) {
 		this.cateNo = cateNo;
 		this.id = id;
+		this.cnt = cnt;
 		this.cateName = cateName;
 		this.description = description;
 		this.regDate = regDate;
@@ -31,6 +35,14 @@ public class CategoryVo {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public int getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
 	}
 
 	public String getCateName() {
@@ -59,7 +71,8 @@ public class CategoryVo {
 
 	@Override
 	public String toString() {
-		return "CategoryVo [cateNo=" + cateNo + ", id=" + id + ", cateName=" + cateName + ", description=" + description
-				+ ", regDate=" + regDate + "]";
+		return "CategoryVo [cateNo=" + cateNo + ", id=" + id + ", cnt=" + cnt + ", cateName=" + cateName
+				+ ", description=" + description + ", regDate=" + regDate + "]";
 	}
+	
 }

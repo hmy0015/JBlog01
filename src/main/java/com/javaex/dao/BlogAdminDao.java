@@ -1,10 +1,13 @@
 package com.javaex.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.javaex.vo.BlogVo;
+import com.javaex.vo.CategoryVo;
 
 @Repository
 public class BlogAdminDao {
@@ -23,5 +26,14 @@ public class BlogAdminDao {
 		System.out.println("2. dao - 기본 설정 수정 ");
 		
 		return sqlSession.update("blog.updateBasic", blogVo);
+	}
+
+	// dao 카테고리 정보 불러오기
+	public List<CategoryVo> getCategoryList(String id) {
+		System.out.println("2. dao - 카테고리 정보 불러오기 ");
+		
+		List<CategoryVo> cateList = sqlSession.selectList("category.getCategoryList", id);
+		
+		return cateList;
 	}
 }

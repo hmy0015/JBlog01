@@ -1,5 +1,7 @@
 package com.javaex.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.service.BlogAdminService;
 import com.javaex.vo.BlogVo;
+import com.javaex.vo.CategoryVo;
 
 @Controller
 public class BlogAdminController {
@@ -43,7 +46,11 @@ public class BlogAdminController {
 	
 	// 카테고리 설정 페이지
 	@RequestMapping("/{id}/admin/category")
-	public String adminCategory(@PathVariable("id") String id) {
+	public String adminCategory(@PathVariable("id") String id, Model model) {
+
+		List<CategoryVo> cateList = blogAdminService.getCategoryList(id);
+		model.addAttribute("cList", cateList);
+		
 		return "blog/admin/blog-admin-cate";
 	}
 	
