@@ -22,7 +22,7 @@ public class UserService {
 		String blogTitle = userVo.getUserName() + "의 블로그입니다.";
 
 		BlogVo blogVo = new BlogVo(uID, blogTitle, "default"); // BlogVo
-		CategoryVo categoryVo = new CategoryVo(0, uID, "미분류", "기본으로 생성되는 카테고리입니다.", null); // CategoryVo
+		CategoryVo categoryVo = new CategoryVo(0, uID, 0, "미분류", "기본으로 생성되는 카테고리입니다.", null); // CategoryVo
 		
 		userDao.insertUser(userVo); // 회원가입
 		userDao.createBlog(blogVo); // 블로그 생성

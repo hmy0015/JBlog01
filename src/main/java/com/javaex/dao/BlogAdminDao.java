@@ -36,4 +36,28 @@ public class BlogAdminDao {
 		
 		return cateList;
 	}
+
+	// dao 카테고리 추가
+	public void addCate(CategoryVo cateVo) {
+		System.out.println("2. dao - 카테고리 추가하기 ");
+
+		sqlSession.insert("category.addCate", cateVo);
+	}
+
+	// dao 등록한 카테고리 정보 가져오기
+	public CategoryVo selectByNo(int cateNo) {
+		System.out.println("2. dao - 등록한 카테고리 정보 가져오기 ");
+		
+		return sqlSession.selectOne("category.selectByNo", cateNo);
+	}
+
+	// dao 카테고리 삭제
+	public int delCate(CategoryVo cateVo) {
+		System.out.println("2. dao - 카테고리 삭제하기 ");
+
+		sqlSession.delete("category.delCate", cateVo);
+		
+		return 1;
+	}
+	
 }

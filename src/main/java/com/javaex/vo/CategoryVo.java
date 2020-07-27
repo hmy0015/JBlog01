@@ -11,6 +11,8 @@ public class CategoryVo {
 	public CategoryVo() {}
 	
 	public CategoryVo(String id) {}
+	
+	public CategoryVo(int cateNo, String id) {}
 
 	public CategoryVo(int cateNo, String id, int cnt, String cateName, String description, String regDate) {
 		this.cateNo = cateNo;

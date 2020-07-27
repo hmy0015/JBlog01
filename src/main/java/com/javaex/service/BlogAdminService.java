@@ -84,4 +84,33 @@ public class BlogAdminService {
 
 		return cateList;
 	}
+	
+	// service 카테고리 추가
+	public CategoryVo addCate(String id, CategoryVo cateVo) {
+		System.out.println("1. service - 카테고리 추가하기 ");
+
+		cateVo.setId(id);		
+		blogAdminDao.addCate(cateVo); // 저장
+
+		int cateNo = cateVo.getCateNo(); // 해당 카테고리의 no값 가져오기
+		
+		return blogAdminDao.selectByNo(cateNo);
+	}
+	
+	// service 카테고리 삭제
+	public int delCate(int cateNo) {
+		System.out.println("1. service - 카테고리 삭제하기 ");
+		
+		CategoryVo cateVo = blogAdminDao.selectByNo(cateNo); // 삭제하려는 카테고리의 정보 받아오기
+		int postCnt = cateVo.getCnt(); // 해당 카테고리의 게시글 개수 파악
+		System.out.println(postCnt);
+		
+		if(postCnt == 0) { // 게시글이 없을 경우 해당 카테고리 삭제
+
+			return blogAdminDao.delCate(cateVo);
+		}
+		else { // 아닐 경우 삭제하지 않고 0 반환
+			return 0;
+		}
+	}
 }
