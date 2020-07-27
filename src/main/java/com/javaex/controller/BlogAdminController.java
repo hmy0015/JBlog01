@@ -65,7 +65,6 @@ public class BlogAdminController {
 
 		// 카테고리 리스트 가져오기
 		List<CategoryVo> cateVo = blogAdminService.getCategoryList(id);
-		System.out.println(cateVo.toString());
 
 		return cateVo;
 	}
@@ -76,6 +75,7 @@ public class BlogAdminController {
 	public CategoryVo addCate(@PathVariable("id") String id, @ModelAttribute CategoryVo cateVo) {
 		System.out.println("[ addCate ]");
 
+		System.out.println(cateVo.toString());
 		CategoryVo categoryVo = blogAdminService.addCate(id, cateVo);
 
 		return categoryVo;

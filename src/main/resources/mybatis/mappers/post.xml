@@ -5,33 +5,35 @@
 	<!-- 최근 카테고리의 게시글 목록 가져오기 -->
 	<select id="getlistInfo" parameterType="String" resultType="com.javaex.vo.PostVo">
 		<![CDATA[
-			SELECT  p.postno,
-			        p.cateno,
-			        p.posttitle,
-			        p.postcontent,
-			        p.regdate
-			FROM post p, ( SELECT max(cateno) as cateNo
-			                FROM category
-			                where id = #{id}) c
-			where p.cateno = c.cateno
-			order by p.postno desc
+			select  pl.postno,
+			        pl.cateno,
+			        pl.posttitle,
+			        pl.postcontent,
+			        pl.regdate
+			from post pl, (select pn.cateno
+			                from post pn, ( SELECT max(postNo) as postNo
+			                                FROM post p, category c
+			                                where p.cateno = c.cateno
+			                                and c.id = #{id} ) p
+			                where pn.postNo = p.postNo) cn
+			where pl.cateNo = cn.cateno
+			order by pl.postno desc
        	]]>
 	</select>
 	
 	<!-- 가장 최근 게시글 정보 받아오기 -->
 	<select id="getPostInfo" parameterType="String" resultType="com.javaex.vo.PostVo">
 		<![CDATA[
-			SELECT p.postno,
+			select  p.postno,
 			        p.cateno,
 			        p.posttitle,
 			        p.postcontent,
 			        p.regdate
-			FROM post p, ( SELECT max(postno) as postNo
-			                FROM post pn, ( SELECT max(cateno) as cateNo
-			                                FROM category
-			                                where id = #{id} ) cn
-			                where pn.cateno = cn.cateNo ) maxpn
-			where p.postno = maxpn.postNo
+			from post p, ( SELECT max(postNo) as postNo
+			                FROM post p, category c
+			                where p.cateno = c.cateno
+			                and c.id = #{id} ) pn
+			where p.postNo = pn.postno
        	]]>
 	</select>
 	

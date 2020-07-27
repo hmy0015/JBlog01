@@ -125,9 +125,10 @@ $("#btnAddCate").on("click", function() {
 	
 	var cateName = $("[name = 'cateName']").val();
 	var description = $("[name = 'description']").val();
+	console.log(cateName + ", " + description);
 	
 	$.ajax({
-		url : "${pageContext.request.contextPath}/${authUser.id}/admin/cateList",		
+		url : "${pageContext.request.contextPath}/${authUser.id}/admin/addCate",		
 		type : "post",
 		data : {cateName: cateName,
 				description: description},
