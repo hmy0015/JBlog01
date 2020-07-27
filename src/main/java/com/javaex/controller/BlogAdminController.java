@@ -2,7 +2,6 @@ package com.javaex.controller;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.javaex.service.BlogAdminService;
 import com.javaex.vo.BlogVo;
 import com.javaex.vo.CategoryVo;
+import com.javaex.vo.PostVo;
 
 @Controller
 public class BlogAdminController {
@@ -93,11 +93,30 @@ public class BlogAdminController {
 	}
 	
 	// 글쓰기 페이지
-	@RequestMapping("/{id}/admin/write")
-	public String adminWrite(@PathVariable("id") String id, Model model) {
+	@RequestMapping("/{id}/admin/writeForm")
+	public String adminWriteForm(@PathVariable("id") String id, Model model) {
+		System.out.println("[ writeForm ]");
 
+		// 블로그 정보 가져오기
+		BlogVo blogVo = blogAdminService.getBlogInfo(id);
+		model.addAttribute("blogVo", blogVo);
 		model.addAttribute("admin", "write"); // 어드민 메뉴 인클루드 시 현재 위치한 메뉴를 표시해주기 위함
 
+		// 카테고리 정보 가져오기
+		List<CategoryVo> cateVo = blogAdminService.getCategoryInfo(id);
+		model.addAttribute("cateVo", cateVo);
+		
 		return "blog/admin/blog-admin-write";
+	}
+	
+
+	@RequestMapping("/{id}/admin/write")
+	public String adminWrite(@PathVariable("id") String id, @ModelAttribute PostVo postVo) {
+		System.out.println("[ write ]");
+		
+		System.out.println(postVo.toString());
+		blogAdminService.write(postVo);
+		
+		return "redirect:/{id}/admin/writeForm";
 	}
 }

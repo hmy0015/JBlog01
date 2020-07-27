@@ -44,7 +44,6 @@
 		      		</thead>
 		      		<tbody id="cateList">
 		      			<!-- 리스트 영역 -->
-		      			
 						<!-- 리스트 영역 -->
 					</tbody>
 				</table>
@@ -104,8 +103,9 @@ function render(cateVo) {
 
 // 전체 카테고리 리스트 불러오기
 function fetchList() {
+
 	$.ajax({
-		url : "${pageContext.request.contextPath}/" + "${authUser.id}" + "/admin/cateList",		
+		url : "${pageContext.request.contextPath}/${authUser.id}/admin/cateList",		
 		type : "post",
 
 		dataType : "json",
@@ -127,7 +127,7 @@ $("#btnAddCate").on("click", function() {
 	var description = $("[name = 'description']").val();
 	
 	$.ajax({
-		url : "${pageContext.request.contextPath}/" + "${authUser.id}" + "/admin/addCate",		
+		url : "${pageContext.request.contextPath}/${authUser.id}/admin/cateList",		
 		type : "post",
 		data : {cateName: cateName,
 				description: description},

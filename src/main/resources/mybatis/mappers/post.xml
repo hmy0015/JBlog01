@@ -34,5 +34,13 @@
 			where p.postno = maxpn.postNo
        	]]>
 	</select>
+	
+	<!-- 게시글 등록 -->
+	<insert id="addPost" parameterType="com.javaex.vo.PostVo">
+		<![CDATA[
+			INSERT INTO post
+			VALUES(SEQ_POST_NO.nextval, #{cateNo}, #{postTitle}, #{postContent}, sysdate)
+		]]>
+	</insert>
 </mapper>
 

@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.javaex.dao.BlogAdminDao;
 import com.javaex.vo.BlogVo;
 import com.javaex.vo.CategoryVo;
+import com.javaex.vo.PostVo;
 
 @Service
 public class BlogAdminService {
@@ -76,41 +77,56 @@ public class BlogAdminService {
 		return blogAdminDao.updateBasic(bVo);
 	}
 
-	// service 카테고리 정보 불러오기
+	// service 카테고리 정보 불러오기 (카테고리 관리 페이지에서 사용)
 	public List<CategoryVo> getCategoryList(String id) {
 		System.out.println("1. service - 카테고리 정보 불러오기 ");
-		
+
 		List<CategoryVo> cateList = blogAdminDao.getCategoryList(id);
 
 		return cateList;
 	}
-	
+
 	// service 카테고리 추가
 	public CategoryVo addCate(String id, CategoryVo cateVo) {
 		System.out.println("1. service - 카테고리 추가하기 ");
 
-		cateVo.setId(id);		
+		cateVo.setId(id);
 		blogAdminDao.addCate(cateVo); // 저장
 
 		int cateNo = cateVo.getCateNo(); // 해당 카테고리의 no값 가져오기
-		
+
 		return blogAdminDao.selectByNo(cateNo);
 	}
-	
+
 	// service 카테고리 삭제
 	public int delCate(int cateNo) {
 		System.out.println("1. service - 카테고리 삭제하기 ");
-		
+
 		CategoryVo cateVo = blogAdminDao.selectByNo(cateNo); // 삭제하려는 카테고리의 정보 받아오기
 		int postCnt = cateVo.getCnt(); // 해당 카테고리의 게시글 개수 파악
 		System.out.println(postCnt);
-		
-		if(postCnt == 0) { // 게시글이 없을 경우 해당 카테고리 삭제
 
-			return blogAdminDao.delCate(cateVo);
-		}
-		else { // 아닐 경우 삭제하지 않고 0 반환
+		if (postCnt == 0) { // 게시글이 없을 경우 해당 카테고리 삭제
+
+			return blogAdminDao.delCate(cateVo); // dao에서 삭제 완료 시 1 반환해줌
+		} else { // 아닐 경우 삭제하지 않고 0 반환
 			return 0;
 		}
+	}
+
+	// service 카테고리 정보 불러오기 (글쓰기 관리 페이지에서 사용)
+	public List<CategoryVo> getCategoryInfo(String id) {
+		System.out.println("1. service - 카테고리 정보 불러오기 ");
+
+		List<CategoryVo> cateList = blogAdminDao.getCategoryInfo(id);
+
+		return cateList;
+	}
+
+	// service 게시글 등록
+	public int write(PostVo postVo) {
+		System.out.println("1. service - 게시글 등록 ");
+		
+		return blogAdminDao.addPost(postVo);
 	}
 }
