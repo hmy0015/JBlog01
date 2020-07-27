@@ -1,6 +1,7 @@
 package com.javaex.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,30 +23,50 @@ public class BlogDao {
 		return sqlSession.selectOne("blog.getBlogInfo", id);
 	}
 
-	// dao - 카테고리 정보 가져오기
+	// dao - 카테고리 리스트 가져오기 (블로그 메인 3번에서 사용)
 	public List<CategoryVo> getCategoryInfo(String id) {
-		System.out.println("2. dao - 카테고리 정보 가져오기");
-
-		List<CategoryVo> cVo = sqlSession.selectList("category.getCategoryInfo", id);
-
-		return cVo;
+		System.out.println("2. dao - 카테고리 리스트 가져오기");
+		
+		List<CategoryVo> cateList = sqlSession.selectList("category.getCategoryInfo", id);				
+		
+		return cateList;
 	}
 
-	// dao - 최근 카테고리의 게시글 목록 가져오기
-	public List<PostVo> getlistInfo(String id) {
-		System.out.println("2. dao - 최근 카테고리의 게시글 목록 가져오기");
-
-		List<PostVo> pVo = sqlSession.selectList("post.getlistInfo", id);
-
-		return pVo;
+	// dao - 최상단 카테고리 넘버
+	public int getMaxCateNo(String id) {
+		System.out.println("2. dao - 최상단 카테고리 넘버 가져오기");
+		
+		Map<String, Object> map = sqlSession.selectOne("category.getMaxCateNo", id);
+		int cateNo = (int)map.get("CATE_NO");
+		System.out.println(cateNo);
+		
+		return cateNo;
 	}
 
-	// dao - 최근 게시글 정보 가져오기
-	public PostVo getPostInfo(String id) {
-		System.out.println("2. dao - 최근 게시글 정보 가져오기");
+	// dao - 최상단 카테고리 내 최근 게시글의 포스트 넘버
+	public int getMaxPostNo(String id) {
+		System.out.println("2. dao - 최상단 카테고리 내 최근 게시글의 포스트 넘버 가져오기");
+		
+		Map<String, Object> map = sqlSession.selectOne("category.getMaxCateNo", id);
+		int postNo = (int)map.get("POST_NO");
+		System.out.println(postNo);
+		
+		return postNo;
+	}
 
-		PostVo post = sqlSession.selectOne("post.getPostInfo", id);
+	// dao - 해당 카테고리 내 게시글 목록 (블로그 메인 4번에서 사용)
+	public List<PostVo> getPostList(int cateNo) {
+		System.out.println("2. dao - 해당 카테고리 내 게시글 목록 가져오기");
+		
+		List<PostVo> pList = sqlSession.selectList("category.getPostList", cateNo);
+		
+		return pList;
+	}
 
-		return post;
+	// dao - 해당 카테고리 내 게시글 정보 (블로그 메인 5번에서 사용)
+	public PostVo getPostInfo(int postNo) {
+		System.out.println("2. dao - 해당 카테고리 내 게시글 정보 가져오기");
+		
+		return sqlSession.selectOne("category.getPostInfo", postNo);
 	}
 }

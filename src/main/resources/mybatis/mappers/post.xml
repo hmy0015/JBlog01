@@ -2,47 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="post">
-	<!-- 최근 카테고리의 게시글 목록 가져오기 -->
-	<select id="getlistInfo" parameterType="String" resultType="com.javaex.vo.PostVo">
+    <!-- 최상단 카테고리 내 최근 게시글의 포스트 넘버 (블로그 메인에서 사용) -->
+	<select id="getMaxPostNo" parameterType="String" resultType="map">
 		<![CDATA[
-			select  pl.postno,
-			        pl.cateno,
-			        pl.posttitle,
-			        pl.postcontent,
-			        pl.regdate
-			from post pl, (select pn.cateno
-			                from post pn, ( SELECT max(postNo) as postNo
-			                                FROM post p, category c
-			                                where p.cateno = c.cateno
-			                                and c.id = #{id} ) p
-			                where pn.postNo = p.postNo) cn
-			where pl.cateNo = cn.cateno
-			order by pl.postno desc
-       	]]>
+			select max(postno) as post_no
+			from post p, ( select max(cateNo) as cateno
+			                from category
+			                where id = #{id}) cn
+			where p.cateno = cn.cateno
+		]]>
 	</select>
 	
-	<!-- 가장 최근 게시글 정보 받아오기 -->
-	<select id="getPostInfo" parameterType="String" resultType="com.javaex.vo.PostVo">
+	<!-- 해당 카테고리 내 게시글 목록 (블로그 메인 4번에서 사용) -->
+	<select id="getPostList" parameterType="int" resultType="com.javaex.vo.PostVo">
 		<![CDATA[
-			select  p.postno,
+			select p.postno,
 			        p.cateno,
 			        p.posttitle,
 			        p.postcontent,
-			        p.regdate
-			from post p, ( SELECT max(postNo) as postNo
-			                FROM post p, category c
-			                where p.cateno = c.cateno
-			                and c.id = #{id} ) pn
-			where p.postNo = pn.postno
-       	]]>
+			        p.regdate 
+			from post p
+			where p.cateno = #{cateNo}
+		]]>
 	</select>
 	
-	<!-- 게시글 등록 -->
-	<insert id="addPost" parameterType="com.javaex.vo.PostVo">
+	<!-- 해당 카테고리 내 게시글 정보 (블로그 메인 5번에서 사용) -->
+	<select id="getPostInfo" parameterType="int" resultType="com.javaex.vo.PostVo">
 		<![CDATA[
-			INSERT INTO post
-			VALUES(SEQ_POST_NO.nextval, #{cateNo}, #{postTitle}, #{postContent}, sysdate)
+			select p.postno,
+			        p.cateno,
+			        p.posttitle,
+			        p.postcontent,
+			        p.regdate 
+			from post p
+			where p.postno = #{postNo}
 		]]>
-	</insert>
+	</select>
+	
 </mapper>
 

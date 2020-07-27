@@ -82,5 +82,13 @@
 			and id = #{id}
 		]]>
     </delete>
-	
+    
+    <!-- 최상단 카테고리 넘버 (블로그 메인에서 사용) -->
+	<select id="getMaxCateNo" parameterType="String" resultType="map">
+		<![CDATA[
+			select max(cateNo) as cate_no
+			from category
+			where id = #{id}
+		]]>
+	</select>
 </mapper>

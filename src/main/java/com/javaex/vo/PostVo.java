@@ -3,6 +3,7 @@ package com.javaex.vo;
 public class PostVo {
 	private int postNo;
 	private int cateNo;
+	private String id;
 	private String postTitle;
 	private String postContent;
 	private String regDate;
@@ -33,6 +34,14 @@ public class PostVo {
 		this.cateNo = cateNo;
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public String getPostTitle() {
 		return postTitle;
 	}
@@ -59,8 +68,7 @@ public class PostVo {
 
 	@Override
 	public String toString() {
-		return "PostVo [postNo=" + postNo + ", cateNo=" + cateNo + ", postTitle=" + postTitle + ", postContent="
-				+ postContent + ", regDate=" + regDate + "]";
-	}
-	
+		return "PostVo [postNo=" + postNo + ", cateNo=" + cateNo + ", id=" + id + ", postTitle=" + postTitle
+				+ ", postContent=" + postContent + ", regDate=" + regDate + "]";
+	}	
 }
