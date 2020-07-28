@@ -2,14 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="post">
-    <!-- 최상단 카테고리 내 최근 게시글의 포스트 넘버 (블로그 메인에서 사용) -->
-	<select id="getMaxPostNo" parameterType="String" resultType="map">
+	<!-- 게시글 등록 -->
+	<insert id="addPost" parameterType="com.javaex.vo.PostVo">
 		<![CDATA[
-			select max(postno) as post_no
-			from post p, ( select max(cateNo) as cateno
-			                from category
-			                where id = #{id}) cn
-			where p.cateno = cn.cateno
+			insert into post values(SEQ_POST_NO.nextval, #{cateNo}, #{postTitle}, #{postContent}, sysdate)
+		]]>
+	</insert>
+	
+    <!-- 카테고리 내 최근 게시글의 포스트 넘버 (블로그 메인에서 사용) -->
+	<select id="getMaxPostNo" parameterType="int" resultType="map">
+		<!-- nvl(컬럼, NULL일경우 반환값) => null 값 치환 함수, 해당 컬럼이 null이면 입력한 반환값으로 치환해줌 -->
+		<![CDATA[
+			select nvl(max(postno), 0) as post_no
+			from post p
+			where p.cateno = #{cateNo}
 		]]>
 	</select>
 	
@@ -20,9 +26,10 @@
 			        p.cateno,
 			        p.posttitle,
 			        p.postcontent,
-			        p.regdate 
+        			to_char(p.regdate, 'yyyy/mm/dd') as regDate
 			from post p
 			where p.cateno = #{cateNo}
+			order by p.postno desc
 		]]>
 	</select>
 	
@@ -33,7 +40,7 @@
 			        p.cateno,
 			        p.posttitle,
 			        p.postcontent,
-			        p.regdate 
+        			to_char(p.regdate, 'yyyy/mm/dd') as regDate
 			from post p
 			where p.postno = #{postNo}
 		]]>

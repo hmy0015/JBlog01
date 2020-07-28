@@ -43,7 +43,7 @@ public class BlogAdminController {
 
 		blogAdminService.modifyBasic(id, blogVo, file);
 
-		return "redirect:/";
+		return "redirect:/{id}/admin/basic";
 	}
 
 	// 카테고리 설정 페이지 로드
@@ -75,7 +75,6 @@ public class BlogAdminController {
 	public CategoryVo addCate(@PathVariable("id") String id, @ModelAttribute CategoryVo cateVo) {
 		System.out.println("[ addCate ]");
 
-		System.out.println(cateVo.toString());
 		CategoryVo categoryVo = blogAdminService.addCate(id, cateVo);
 
 		return categoryVo;
@@ -114,7 +113,6 @@ public class BlogAdminController {
 	public String adminWrite(@PathVariable("id") String id, @ModelAttribute PostVo postVo) {
 		System.out.println("[ write ]");
 		
-		System.out.println(postVo.toString());
 		blogAdminService.write(postVo);
 		
 		return "redirect:/{id}/admin/writeForm";

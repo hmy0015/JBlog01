@@ -15,7 +15,7 @@ public class UserService {
 	
 	// service 회원가입
 	public int join(UserVo userVo) {
-		System.out.println("1. service - join");
+		System.out.println("service - join");
 		
 		// 각 vo에 데이터를 담기 위한 변수들
 		String uID = userVo.getId();
@@ -33,14 +33,14 @@ public class UserService {
 
 	// service 로그인
 	public UserVo login(UserVo userVo) {
-		System.out.println("1. service - login");
+		System.out.println("service - login");
 		
 		return userDao.selectUser(userVo);
 	}
 
 	// service 입력한 아이디 값과 중복되는 데이터가 있는 지 검사
 	public boolean checkId(String id) {
-		System.out.println("2. UserService - 중복체크");
+		System.out.println("UserService - 중복체크");
 		UserVo userVo = userDao.checkId(id);
 		boolean result = true;
 		

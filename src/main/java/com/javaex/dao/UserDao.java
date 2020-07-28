@@ -15,33 +15,33 @@ public class UserDao {
 	
 	// service 회원가입
 	public int insertUser(UserVo userVo) {
-		System.out.println("2. dao - join");
+		System.out.println("dao - join");
 		
 		return sqlSession.insert("user.insertUser", userVo);
 	}
 	
 	public int createBlog(BlogVo blogVo) {
-		System.out.println("3. dao - createBlog");
+		System.out.println("dao - createBlog");
 		
 		return sqlSession.insert("blog.createBlog", blogVo);
 	}
 
 	public int insertCategory(CategoryVo categoryVo) {
-		System.out.println("4. dao - insertCategory");
+		System.out.println("dao - insertCategory");
 		
 		return sqlSession.insert("category.insertCategory", categoryVo);
 	}
 	
 	// dao 로그인
 	public UserVo selectUser(UserVo userVo) {
-		System.out.println("3. UserDao - login");
+		System.out.println("UserDao - login");
 		
 		return sqlSession.selectOne("user.selectUser", userVo);
 	}
 
 	// dao 입력한 아이디 값과 중복되는 데이터가 있는 지 검사
 	public UserVo checkId(String id) {
-		System.out.println("3. UserDao - 중복체크");
+		System.out.println("UserDao - 중복체크");
 		return sqlSession.selectOne("user.selectById", id);
 	} 
 }

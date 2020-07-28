@@ -1,6 +1,6 @@
 package com.javaex.controller;
 
-import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.javaex.service.BlogService;
 import com.javaex.vo.BlogVo;
-import com.javaex.vo.CategoryVo;
 import com.javaex.vo.PostVo;
 
 @Controller
@@ -24,6 +23,7 @@ public class BlogController {
 	@RequestMapping("/{id}")
 	public String main( @PathVariable("id") String id,
 						@ModelAttribute PostVo postVo,
+						@RequestParam(value="crtCateNo", required=false, defaultValue = "0") int crtCateNo,
 						Model model) {
 		System.out.println("[ blog main ]");
 		
@@ -33,6 +33,11 @@ public class BlogController {
 		// 현재 블로그의 정보 가져오기
 		BlogVo bVo = blogService.getBlogInfo(id);
 		model.addAttribute("blogVo", bVo);
+		
+		Map<String, Object> map = blogService.getMainInfo(id, crtCateNo, postVo);
+		model.addAttribute("cateList", map.get("cateList"));
+		model.addAttribute("postList", map.get("postList"));
+		model.addAttribute("postVo", map.get("postVo"));
 
 		return "blog/blog-main";
 	}
