@@ -95,7 +95,7 @@ $("#btnIdCheck").on("click", function() {
 });
 
 // 약관 동의
-$("#joinFormTag").on("click", function(){
+$("#btnJoin").on("click", function(){
 	var agree = $("#chkAgree").is(":checked"); // 해당 아이디를 가진 태그에 체크가 되어있는 지를 확인하는 함수
 	
 	if(agree == true) { /* 체크 한 경우 */
