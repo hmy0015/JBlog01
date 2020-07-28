@@ -24,7 +24,7 @@
 	<select id="selectById" parameterType="String" resultType="com.javaex.vo.UserVo">
 		<![CDATA[
 			select id,
-			       no
+			       userNo
 			from users
 			where id = #{id}
        	]]>

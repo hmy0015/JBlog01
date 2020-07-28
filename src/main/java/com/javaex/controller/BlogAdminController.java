@@ -2,6 +2,8 @@ package com.javaex.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +33,7 @@ public class BlogAdminController {
 		BlogVo blogVo = blogAdminService.getBlogInfo(id);
 		model.addAttribute("blogVo", blogVo);
 		model.addAttribute("admin", "basic"); // 어드민 메뉴 인클루드 시 현재 위치한 메뉴를 표시해주기 위함
-
+		
 		return "blog/admin/blog-admin-basic";
 	}
 

@@ -77,7 +77,7 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping("/idcheck")
 	public boolean idcheck(@RequestParam("id") String id) {
-		System.out.println("1. UserController - 중복체크(ajax)");
+		System.out.println("UserController - 중복체크(ajax)");
 		
 		boolean result = userService.checkId(id);
 		

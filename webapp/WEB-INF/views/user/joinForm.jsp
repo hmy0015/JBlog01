@@ -66,7 +66,7 @@
 
 <script type="text/javascript">
 $("#btnIdCheck").on("click", function() {
-	var uId = $("#input-uid").val();
+	var uId = $("[name = id]").val();
 	
 	$.ajax({
 		url : "${pageContext.request.contextPath}/user/idcheck",		
@@ -74,8 +74,7 @@ $("#btnIdCheck").on("click", function() {
 		data : {id: uId},
 
 		dataType : "json",
-		success : function(userVo){ // function(변수명:컨트롤러에서 넘어오는 거랑 상관없이 새로 변수 만드는 거임)
-			
+		success : function(result){
 			/*성공 시 처리해야될 코드 작성*/
 			
 			if(userVo == true) {
@@ -91,7 +90,7 @@ $("#btnIdCheck").on("click", function() {
 
 			console.error(status + " : " + error);
 		}
-	});
+	}); 
 	
 });
 
