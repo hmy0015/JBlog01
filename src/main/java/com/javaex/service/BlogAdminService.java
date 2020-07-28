@@ -34,7 +34,7 @@ public class BlogAdminService {
 		BlogVo bVo = new BlogVo();
 		String saveName = null;
 		
-		if(file.isEmpty()) {
+		if(file.isEmpty()) { // 이미지 파일을 업로드 하지 않은 경우 현재 사용중인 이미지 파일 NAME을 불러옴
 			BlogVo vo = blogAdminDao.getBlogInfo(id);
 			saveName = vo.getLogoFile();
 			System.out.println(saveName);
